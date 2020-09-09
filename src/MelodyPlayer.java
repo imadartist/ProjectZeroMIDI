@@ -1,11 +1,9 @@
 /*
- * c2017 Courtney Brown 
- * 
+ * Programmer: Madison Leyens
  * Class: MelodyPlayer
- * Description: Sends a melody of midi notes to an external player/midi channel
- * 
+ * Date: 9.7.2020
+ * Description: Controls variables related to the MIDI file to play the melody
  */
- 
 
 import themidibus.*;
 import processing.core.*;

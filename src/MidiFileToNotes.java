@@ -1,10 +1,8 @@
-
 /*
- * c2017 Courtney Brown 
- * 
+ * Programmer: Madison Leyens
  * Class: MidiFileToNotes
+ * Date: 9.7.2020
  * Description: Uses JMusic to get notes & info from a midi file
- * 
  */
 
 import java.util.*;

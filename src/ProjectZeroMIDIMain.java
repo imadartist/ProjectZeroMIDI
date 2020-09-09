@@ -13,7 +13,6 @@ import java.net.*;
 
 //import javax.sound.midi.*;
 
-			//make sure this class name matches your file name, if not fix.
 public class ProjectZeroMIDIMain extends PApplet {
 
 	MelodyPlayer player; //play a midi sequence
@@ -27,7 +26,7 @@ public class ProjectZeroMIDIMain extends PApplet {
 
 	//setting the window size to 300x300
 	public void settings() {
-		size(300, 300);
+		size(500, 500);
 
 	}
 
@@ -42,8 +41,8 @@ public class ProjectZeroMIDIMain extends PApplet {
 		
 		// returns a url
 		String filePath = getPath("mid/gardel_por.mid");
+		
 		// playMidiFile(filePath);
-
 		midiNotes = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
 													//be created with "new". Note how every object is a pointer or reference. Every. single. one.
 
@@ -51,10 +50,11 @@ public class ProjectZeroMIDIMain extends PApplet {
 //		// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
 		midiNotes.setWhichLine(0);
 		
-		//training
+		//training the generators for pitch and rhythm to get the pitch and rhythm arrays from the MIDI Notes object 
 		pitchGenerator.train(midiNotes.getPitchArray());
 		rhythmGenerator.train(midiNotes.getRhythmArray());
 		
+		//enables use to generate and play a MIDI sequence file
 		player = new MelodyPlayer(this, 100.0f);
 		player.setup();
 		player.setMelody( pitchGenerator.generate(20) );
@@ -63,9 +63,10 @@ public class ProjectZeroMIDIMain extends PApplet {
 
 	public void draw() {
 		//player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
-		textSize(32);
+		//this is what the user sees that allows them to start the program
+		textSize(12);
 		fill(0,102,153);
-		text("Press 1 to start the unit test!", width/2, height/2);
+		text("Press 1 to start the unit test!", width/4, height/2);
 	}
 
 	//this finds the absolute path of a file
@@ -93,6 +94,10 @@ public class ProjectZeroMIDIMain extends PApplet {
 
 	//this starts & restarts the melody.
 	public void keyPressed() {
+		//this calls the Probability Generator class delineated by Pitch and Rhythm
+		ProbabilityGenerator<Integer> generatorPitch = new ProbabilityGenerator(); 
+		ProbabilityGenerator<Double> generatorRhythm = new ProbabilityGenerator();
+		
 		MidiFileToNotes midiNotesMary; //read a midi file
 		
 		// returns a url
@@ -106,13 +111,18 @@ public class ProjectZeroMIDIMain extends PApplet {
 		// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
 		midiNotesMary.setWhichLine(0);
 		
+		//training the generators for pitch and rhythm to get the pitch and rhythm arrays from the MIDI Notes Mary object 
+		generatorPitch.train(midiNotesMary.getPitchArray());
+		generatorRhythm.train(midiNotesMary.getRhythmArray());
+		
 		if (key == ' ') {
 			player.reset();
 			println("Melody started!");
 		} else if( key == '1') {
-			//run your unit 1
-			System.out.println(midiNotesMary.getPitchArray() );
-			System.out.println(midiNotesMary.getRhythmArray() );
+			//runs unit 1 test when the user presses "1" by printing both the pitch and rhythm tokens & probabilities using the methods in ProbabilityGenerator
+			generatorPitch.printProbabilityDistribution("Pitches:");
+			generatorRhythm.printProbabilityDistribution("Rhythms:");
+			
 		}
 	}
 }

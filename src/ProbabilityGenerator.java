@@ -65,7 +65,10 @@ public class ProbabilityGenerator<T> {
 	//Part 2!
 	T generate() {
 		T newToken = null;
-		// do something here
+		for (int i = 0; i < alphabet_counts.size(); i++) {
+			//int gen = (alphabet_counts.get(i)/total)* alphabet.get(i);
+			System.out.println("generate function");
+		}
 		return newToken;
 
 	}

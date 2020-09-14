@@ -125,10 +125,10 @@ public class ProjectZeroMIDIMain extends PApplet {
 			
 		} else if (key == '2') {
 			//runs unit 2 test
-			generatorPitch.printProbabilityDistribution("Pitches:");
-			generatorRhythm.printProbabilityDistribution("Rhythms:");
+			generatorPitch.generate(20);
+			generatorRhythm.generate(20);
+			
 			
 		}
 		}
 	}
-}

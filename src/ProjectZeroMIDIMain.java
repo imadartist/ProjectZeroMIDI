@@ -62,7 +62,7 @@ public class ProjectZeroMIDIMain extends PApplet {
 	}
 
 	public void draw() {
-		//player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		//this is what the user sees that allows them to start the program
 		textSize(12);
 		fill(0,102,153);
@@ -125,10 +125,17 @@ public class ProjectZeroMIDIMain extends PApplet {
 			
 		} else if (key == '2') {
 			//runs unit 2 test
-			generatorPitch.generate(20);
-			generatorRhythm.generate(20);
+			System.out.println(generatorPitch.generate(20));
+			//System.out.println(generatorRhythm.generate(20));
 			
-			
+		} else if (key=='3') {
+			//runs unit 3 test
+			ProbabilityGenerator<Integer> probDistPitch = new ProbabilityGenerator();
+			//ProbabilityGenerator<Double> probDistRhythm = new ProbabilityGenerator();
+			for (int i = 0; i < 10000; i++) {	
+				probDistPitch.train(generatorPitch.generate(20));
+			}
+				probDistPitch.printProbabilityDistribution("ProbDist Pitches:");
 		}
 		}
 	}

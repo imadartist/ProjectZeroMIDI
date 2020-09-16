@@ -64,14 +64,39 @@ public class ProbabilityGenerator<T> {
 
 	//Part 2!
 	T generate() {
-		T newToken = null;
-		for (int i = 0; i < alphabet_counts.size(); i++) {
-			//int gen = (alphabet_counts.get(i)/total)* alphabet.get(i);
-			System.out.println("generate function");
+		//T newToken = null;
+		
+		ArrayList<Float> sumProbs = new ArrayList<Float>();
+		ArrayList<Float> probs = new ArrayList<Float>();
+		
+		for (int i = 0; i < alphabet.size(); i++) {
+			probs.add(alphabet_counts.get(i)/total);
 		}
-		return newToken;
+		
+	
+		sumProbs.add(probs.get(0));
+		for (int i =1; i < probs.size(); i++) {
+			sumProbs.add(sumProbs.get(i-1)+probs.get(i));
+		}
+		
+		
+		
+		
+		float randIndex = (float)Math.random();
+		boolean found = false;
+		int i = 0;
+		
+		while (!found && i<sumProbs.size()) {
+			found = randIndex < sumProbs.get(i);
+			i++;
+		}
+		
+		return alphabet.get(i-1);
+		
+	
+		}
 
-	}
+	
 
 	ArrayList<T> generate(int length) {
 		ArrayList<T> newSequence = new ArrayList<T>();
@@ -81,4 +106,5 @@ public class ProbabilityGenerator<T> {
 		}
 		return newSequence;
 	}
-}
+	}
+	

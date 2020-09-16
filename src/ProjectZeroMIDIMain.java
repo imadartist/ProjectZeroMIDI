@@ -1,3 +1,9 @@
+/*
+ * Programmer: Madison Leyens
+ * Class: ProjectZeroMIDIMain
+ * Date: 9.15.2020
+ * Description: Main Class that holds all unit tests
+ */
 import processing.core.*;
 
 import java.util.*; 
@@ -124,18 +130,20 @@ public class ProjectZeroMIDIMain extends PApplet {
 			generatorRhythm.printProbabilityDistribution("Rhythms:");
 			
 		} else if (key == '2') {
-			//runs unit 2 test
+			//runs unit 2 test when the user presses "2" and calls the generate function to make a melody with 20 notes and then print the pitches and rhythms to the console
 			System.out.println(generatorPitch.generate(20));
-			//System.out.println(generatorRhythm.generate(20));
+			System.out.println(generatorRhythm.generate(20));
 			
 		} else if (key=='3') {
-			//runs unit 3 test
+			//runs unit 3 test when the user presses "3" and probabilities are calculated and printed for melodies of 20 notes 10,000 times
 			ProbabilityGenerator<Integer> probDistPitch = new ProbabilityGenerator();
-			//ProbabilityGenerator<Double> probDistRhythm = new ProbabilityGenerator();
+			ProbabilityGenerator<Double> probDistRhythm = new ProbabilityGenerator();
 			for (int i = 0; i < 10000; i++) {	
 				probDistPitch.train(generatorPitch.generate(20));
+				probDistRhythm.train(generatorRhythm.generate(20));
 			}
 				probDistPitch.printProbabilityDistribution("ProbDist Pitches:");
+				probDistRhythm.printProbabilityDistribution("ProbDist Rhythms:");
 		}
 		}
 	}

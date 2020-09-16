@@ -62,48 +62,51 @@ public class ProbabilityGenerator<T> {
 		}
 	}
 
-	//Part 2!
 	T generate() {
-		//T newToken = null;
 		
-		ArrayList<Float> sumProbs = new ArrayList<Float>();
+		//Array List that will hold all of the collected probabilities for each value
 		ArrayList<Float> probs = new ArrayList<Float>();
+		//Array List that will hold the sums of the calculated probabilities
+		ArrayList<Float> sumProbs = new ArrayList<Float>();
 		
+		//putting all probabilities contained in alphabet in the probs array
 		for (int i = 0; i < alphabet.size(); i++) {
 			probs.add(alphabet_counts.get(i)/total);
 		}
 		
-	
+		//putting the first index of probs in sumProbs and then adding the each index in probs to the previous indexes (probabilities) in the loop
 		sumProbs.add(probs.get(0));
 		for (int i =1; i < probs.size(); i++) {
 			sumProbs.add(sumProbs.get(i-1)+probs.get(i));
 		}
 		
 		
-		
-		
+		//generating random indexes
 		float randIndex = (float)Math.random();
 		boolean found = false;
 		int i = 0;
 		
+		//finding what probability category the random index generated falls into and incrementing
 		while (!found && i<sumProbs.size()) {
 			found = randIndex < sumProbs.get(i);
 			i++;
 		}
-		
+		//getting from alphabet and returning the value of the index
 		return alphabet.get(i-1);
 		
 	
 		}
 
 	
-
+	//Array List that takes how many notes will be generated in the melody
 	ArrayList<T> generate(int length) {
 		ArrayList<T> newSequence = new ArrayList<T>();
+		//holds and generates new melodies
 		for (int i = 0; i < length; i++) {
 			newSequence.add(generate());
 
 		}
+		//returns new melodies
 		return newSequence;
 	}
 	}

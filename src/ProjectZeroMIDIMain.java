@@ -72,7 +72,7 @@ public class ProjectZeroMIDIMain extends PApplet {
 		//this is what the user sees that allows them to start the program
 		textSize(12);
 		fill(0,102,153);
-		text("Press 1 to start the unit test!", width/4, height/2);
+		text("Press 1 to start unit test 1, 2 to start unit test 2, and 3 to start unit test 3!", width/4, height/2);
 	}
 
 	//this finds the absolute path of a file
@@ -124,7 +124,7 @@ public class ProjectZeroMIDIMain extends PApplet {
 		if (key == ' ') {
 			player.reset();
 			println("Melody started!");
-		} else if( key == '1') {
+		} else if( key == '1') { 
 			//runs unit 1 test when the user presses "1" by printing both the pitch and rhythm tokens & probabilities using the methods in ProbabilityGenerator
 			generatorPitch.printProbabilityDistribution("Pitches:");
 			generatorRhythm.printProbabilityDistribution("Rhythms:");
@@ -136,7 +136,7 @@ public class ProjectZeroMIDIMain extends PApplet {
 			
 		} else if (key=='3') {
 			//runs unit 3 test when the user presses "3" and probabilities are calculated and printed for melodies of 20 notes 10,000 times
-			ProbabilityGenerator<Integer> probDistPitch = new ProbabilityGenerator();
+			ProbabilityGenerator<Integer> probDistPitch = new ProbabilityGenerator(); 
 			ProbabilityGenerator<Double> probDistRhythm = new ProbabilityGenerator();
 			for (int i = 0; i < 10000; i++) {	
 				probDistPitch.train(generatorPitch.generate(20));

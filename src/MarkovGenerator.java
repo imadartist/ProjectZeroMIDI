@@ -17,7 +17,23 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	}
 	
 	void train(ArrayList<T> newTokens) {
-		
+		int lastIndex = -1;
+		for (int i = 0; i < newTokens.size(); i++) {
+			int tokenIndex = alphabet.indexOf(newTokens.get(i));
+			if (lastIndex == -1) {
+				tokenIndex = alphabet.size();
+				ArrayList<ArrayList<Integer>> transitionTable = new ArrayList();
+				ArrayList<Integer> myRow = new ArrayList();
+				myRow.add(tokenIndex);
+				ArrayList<Integer> row = transitionTable.get(0);
+				Integer myElement = row.get(0);
+			} if (lastIndex > -1 ) {
+				//ArrayList<Integer> row = transitionTable.get(lastIndex);
+				
+				
+			}
+			 lastIndex = tokenIndex;
+		}
 	}
 	
 	ArrayList<T> generate( int length ) 
@@ -39,23 +55,5 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 //		}
 		return newSequence;
 	}
-	/*
-	 * ArrayList<ArrayList<Integer>> transitionTable( ArrayList alphabet<int input>
-	 * ); { 
-	 * to create the ArrayList 
-	 * transitionTable = new ArrayList();
-	 * 
-	 * to add a row 
-	 * ArrayList<Integer> myRow = new ArrayList(); myRow.add(8);
-	 * 
-	 * to get the 0th (i.e., first) ArrayList or row from our ArrayList of
-	 * Arraylists:
-	 * 
-	 * ArrayList<Integer> row = transitionTable.get(0);
-	 * 
-	 * then to get the 0th element from the row (assuming it is both not empty &
-	 * has been instantiated) Integer myElement = row.get(0);
-	 * 
-	 * System.out.println(row.get(0)); //will print 8. }
-	 */
+
 }

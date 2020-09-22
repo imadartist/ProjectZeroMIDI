@@ -72,7 +72,7 @@ public class ProjectZeroMIDIMain extends PApplet {
 		//this is what the user sees that allows them to start the program
 		textSize(12);
 		fill(0,102,153);
-		text("Press 1 to start unit test 1, 2 to start unit test 2, and 3 to start unit test 3!", width/4, height/2);
+		text("Press 1 to start unit test 1, 2 to start unit test 2, 3 to start unit test 3, and 4 to start unit test 4!", width/4, height/2);
 	}
 
 	//this finds the absolute path of a file
@@ -103,6 +103,8 @@ public class ProjectZeroMIDIMain extends PApplet {
 		//this calls the Probability Generator class delineated by Pitch and Rhythm
 		ProbabilityGenerator<Integer> generatorPitch = new ProbabilityGenerator(); 
 		ProbabilityGenerator<Double> generatorRhythm = new ProbabilityGenerator();
+		MarkovGenerator<Integer> markovPitches = new MarkovGenerator();
+		MarkovGenerator<Double> markovRhythms = new MarkovGenerator();
 		
 		MidiFileToNotes midiNotesMary; //read a midi file
 		
@@ -120,6 +122,8 @@ public class ProjectZeroMIDIMain extends PApplet {
 		//training the generators for pitch and rhythm to get the pitch and rhythm arrays from the MIDI Notes Mary object 
 		generatorPitch.train(midiNotesMary.getPitchArray());
 		generatorRhythm.train(midiNotesMary.getRhythmArray());
+		markovPitches.train(midiNotesMary.getPitchArray());
+		markovRhythms.train(midiNotesMary.getRhythmArray());
 		
 		if (key == ' ') {
 			player.reset();
@@ -144,6 +148,22 @@ public class ProjectZeroMIDIMain extends PApplet {
 			}
 				probDistPitch.printProbabilityDistribution("ProbDist Pitches:");
 				probDistRhythm.printProbabilityDistribution("ProbDist Rhythms:");
+				
+		} else if (key=='4') {
+			/*MarkovGenerator<Integer> mPitches = new MarkovGenerator();
+			MarkovGenerator<Double> mRhythms = new MarkovGenerator();
+			for (int i = 0; i< alphabet.size(); i++)  { //or should it be 1 to 10,000
+			mPitches.train(generatorPitch.generate(20));
+			mRhythms.train(generatorRhythm.generate(20)); 
+			}*/
+			
+			
+			//markovPitches.printTransitionTable("Markov Pitches:");
+			//markovRhythms.printTransitionTable("Markov Rhythms:");
+				
+		}
+		
+			
 		}
 		}
-	}
+	

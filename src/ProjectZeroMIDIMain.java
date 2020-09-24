@@ -150,15 +150,23 @@ public class ProjectZeroMIDIMain extends PApplet {
 				probDistRhythm.printProbabilityDistribution("ProbDist Rhythms:");
 				
 		} else if (key=='4') {
-			/*MarkovGenerator<Integer> mPitches = new MarkovGenerator();
+			int initToken = generatorPitch.generate();
+			
+			MarkovGenerator<Integer> mPitches = new MarkovGenerator();
 			MarkovGenerator<Double> mRhythms = new MarkovGenerator();
-			for (int i = 0; i< alphabet.size(); i++)  { //or should it be 1 to 10,000
+			
+			//mPitches.train()
+			
+			System.out.println(mPitches.generate(20, initToken));
+			System.out.println(mRhythms.generate(20, initToken));
+			
+			for (int i = 0; i< 10000); i++)  { //or should it be 1 to 10,000
 			mPitches.train(generatorPitch.generate(20));
 			mRhythms.train(generatorRhythm.generate(20)); 
-			}*/
+			}
 			
 			
-			//markovPitches.printTransitionTable("Markov Pitches:");
+			markovPitches.printTransitionTable("Markov Pitches:");
 			//markovRhythms.printTransitionTable("Markov Rhythms:");
 				
 		}

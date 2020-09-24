@@ -53,32 +53,34 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 		System.out.println(transitionTable);
 	}
 
-	void printProbabilityDistribution(String s) {
+	void printTransitionTable(String s) {
 		for (int i = 0; i < transitionTable.size(); i++) {
 			ArrayList<Integer> row = transitionTable.get(i);
-			int sum = 0;
+			float sum = 0;
 			for (int a = 0; a < row.size(); a++) {
-				sum = row.get(i) + sum;
+				sum = row.get(a) + sum;
+
 			}
-			//System.out.print(transitionTable.get(i)/sum);
+			for (int b = 0; b < row.size(); b++) {
+				if (sum == 0) {
+					System.out.print(0);
+				} else {
+					System.out.print(" " + row.get(b) / sum + " " );
+				}
+			}
+			System.out.println(" ");
 		}
 	}
 
-	ArrayList<T> generate(int length) {
-		ArrayList<T> newSequence = new ArrayList<T>();
-//		for(int i=0; i<length; i++)
-//		{
-//			newSequence.add(generate());			
-//		}
-		return newSequence;
+	T generate(T initToken) {
+		T newToken = null;
+
+		return newToken;
 	}
 
 	ArrayList<T> generate(int length, T initToken) {
 		ArrayList<T> newSequence = new ArrayList<T>();
-//		for(int i=0; i<length; i++)
-//		{
-//			newSequence.add(generate());
-//		}
+		
 		return newSequence;
 	}
 

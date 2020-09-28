@@ -54,6 +54,10 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	}
 
 	void printTransitionTable(String s) {
+		
+		System.out.println(s);
+		System.out.println("-----Transition Table-----");
+		
 		for (int i = 0; i < transitionTable.size(); i++) {
 			ArrayList<Integer> row = transitionTable.get(i);
 			float sum = 0;

@@ -73,6 +73,7 @@ public class ProjectZeroMIDIMain extends PApplet {
 		textSize(12);
 		fill(0,102,153);
 		text("Press 1 to start unit test 1, 2 to start unit test 2, 3 to start unit test 3, and 4 to start unit test 4!", width/4, height/2);
+		
 	}
 
 	//this finds the absolute path of a file
@@ -150,8 +151,10 @@ public class ProjectZeroMIDIMain extends PApplet {
 				probDistRhythm.printProbabilityDistribution("ProbDist Rhythms:");
 				
 		} else if (key=='4') {
+			//runs unit 4 test when the user presses "4"
 			int initToken = generatorPitch.generate();
 			
+			//declaring Markov Generator array lists for pitches and rhythms
 			MarkovGenerator<Integer> mPitches = new MarkovGenerator();
 			MarkovGenerator<Double> mRhythms = new MarkovGenerator();
 			
@@ -159,7 +162,7 @@ public class ProjectZeroMIDIMain extends PApplet {
 			//mRhythms.train(markovRhythms.generate(20, initToken));
 			
 		
-			
+			//training and generating melodies of 20 notes 10000 times
 			for (int i = 0; i< 10000; i++)  { 
 			mPitches.train(generatorPitch.generate(20));
 			mRhythms.train(generatorRhythm.generate(20)); 

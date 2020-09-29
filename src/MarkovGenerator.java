@@ -50,7 +50,7 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 			}
 			lastIndex = tokenIndex; // setting current index to previous for next loop
 		}
-		System.out.println(transitionTable);
+		//System.out.println(transitionTable);
 	}
 
 	void printTransitionTable(String s) {

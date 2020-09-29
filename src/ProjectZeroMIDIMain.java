@@ -123,8 +123,14 @@ public class ProjectZeroMIDIMain extends PApplet {
 		//training the generators for pitch and rhythm to get the pitch and rhythm arrays from the MIDI Notes Mary object 
 		generatorPitch.train(midiNotesMary.getPitchArray());
 		generatorRhythm.train(midiNotesMary.getRhythmArray());
-		markovPitches.train(midiNotesMary.getPitchArray());
-		markovRhythms.train(midiNotesMary.getRhythmArray());
+		
+		
+		//declaring Markov Generator array lists for pitches and rhythms
+		MarkovGenerator<Integer> mPitches = new MarkovGenerator();
+		MarkovGenerator<Double> mRhythms = new MarkovGenerator();
+		
+		mPitches.train(midiNotesMary.getPitchArray());
+		mRhythms.train(midiNotesMary.getRhythmArray());
 		
 		if (key == ' ') {
 			player.reset();
@@ -152,30 +158,37 @@ public class ProjectZeroMIDIMain extends PApplet {
 				
 		} else if (key=='4') {
 			//runs unit 4 test when the user presses "4"
-			int initToken = generatorPitch.generate();
-			
-			//declaring Markov Generator array lists for pitches and rhythms
-			MarkovGenerator<Integer> mPitches = new MarkovGenerator();
-			MarkovGenerator<Double> mRhythms = new MarkovGenerator();
-			
-			mPitches.train(markovPitches.generate(20, initToken));
-			//mRhythms.train(markovRhythms.generate(20, initToken));
+			int initTokenOne = generatorPitch.generate();
+			double initTokenTwo = generatorRhythm.generate();
 			
 		
-			//training and generating melodies of 20 notes 10000 times
-			for (int i = 0; i< 10000; i++)  { 
-			mPitches.train(generatorPitch.generate(20));
-			mRhythms.train(generatorRhythm.generate(20)); 
+			
+			mPitches.printTransitionTable("Markov Unit Test 1 Pitches:");
+			mRhythms.printTransitionTable("Markov Unit Test 1 Rhythms:");
+			
+		} else if (key=='5') {
+			
+			System.out.print(mPitches.generate(20));
+			System.out.print(mRhythms.generate(20));
+			
+			
+
 			}
-			
+		}
+}
+//		//} else if (key == '6') {
+			//markovPitches.printTransitionTable("Markov Pitches:");
+//			System.out.println(" ");
+//			markovRhythms.printTransitionTable("Markov Rhythms:");
+//			
+//			mPitches.printTransitionTable("Markov New Melody Pitches:");
+//			mRhythms.printTransitionTable("Markove New Melody Rhythms:");
+			//training and generating melodies of 20 notes 10000 times
+//			for (int i = 0; i< 10000; i++)  { 
+//			mPitches.train(generatorPitch.generate(20));
+//			mRhythms.train(generatorRhythm.generate(20)); 
+//			}
+		//}
 		
-			markovPitches.printTransitionTable("Markov Pitches:");
-			System.out.println(" ");
-			markovRhythms.printTransitionTable("Markov Rhythms:");
-				
-		}
 		
-			
-		}
-		}
 	

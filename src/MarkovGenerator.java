@@ -12,12 +12,17 @@ import java.util.ArrayList;
 
 public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	ArrayList<ArrayList<Integer>> transitionTable = new ArrayList();
+	
+	ProbabilityGenerator<T> probGen = new ProbabilityGenerator();
+		
+	
 
 	MarkovGenerator() {
 		super();
 	}
 
 	void train(ArrayList<T> newTokens) { // filling the empty transition table
+		probGen.train(newTokens);
 		int lastIndex = -1; // last index starts when there is no index, transition table is empty
 		for (int i = 0; i < newTokens.size(); i++) {// for all new notes/"tokens"/inputs
 			int tokenIndex = alphabet.indexOf(newTokens.get(i));// tokenIndex is the index of each new
@@ -50,7 +55,7 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 			}
 			lastIndex = tokenIndex; // setting current index to previous for next loop
 		}
-		//System.out.println(transitionTable);
+		
 	}
 
 	void printTransitionTable(String s) {
@@ -80,14 +85,41 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 
 	T generate(T initToken) {
 		T newToken = null;
+		ArrayList<T> newProbs = new ArrayList<T>();
+
+		// use initToken to get index from alphabet
+		int tokenIndex = alphabet.indexOf(initToken);
+		// if index not in data set
+		if (tokenIndex == -1) {
+			System.out.print("Not Available in Data Set");
+		} else {
+			// use index to find row
+			ArrayList<Integer> row = transitionTable.get(tokenIndex);
+			total = 0;
+			for (int a = 0; a < row.size(); a++) {
+				// total the counts in the row
+				total = row.get(a) + total;
+			}
+			if (total == 0) {
+				return probGen.generate();
+			} else {
+				// divide each count by the total
+				alphabet_counts = row;
+				return super.generate();
+			}
+
+		}
 
 		return newToken;
 	}
 
 	ArrayList<T> generate(int length, T initToken) {
 		ArrayList<T> newSequence = new ArrayList<T>();
-		
+		//generate with init token add it to sequence and add it to next
 		return newSequence;
 	}
 
+	ArrayList<T> generate(int length) {
+		return generate(length, probGen.generate());
+	}
 }

@@ -161,8 +161,6 @@ public class ProjectZeroMIDIMain extends PApplet {
 			int initTokenOne = generatorPitch.generate();
 			double initTokenTwo = generatorRhythm.generate();
 			
-		
-			
 			mPitches.printTransitionTable("Markov Unit Test 1 Pitches:");
 			mRhythms.printTransitionTable("Markov Unit Test 1 Rhythms:");
 			
@@ -170,7 +168,6 @@ public class ProjectZeroMIDIMain extends PApplet {
 			
 			System.out.print(mPitches.generate(20));
 			System.out.print(mRhythms.generate(20));
-			
 			
 
 			}

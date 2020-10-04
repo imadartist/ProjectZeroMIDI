@@ -1,6 +1,6 @@
 /*
  * Programmer: Madison Leyens
- * Class: MelodyPlayer
+ * Class: Markov Generator
  * Date: 9.20.2020
  * Description: Generating melodies not just based on probability of occurrence of a given note but also using the probability of 
  * the note appearing at a given position in the sequence of notes
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 	ArrayList<ArrayList<Integer>> transitionTable = new ArrayList();
-	
 	ProbabilityGenerator<T> probGen = new ProbabilityGenerator();
 		
 	
@@ -85,10 +84,8 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 
 	T generate(T initToken) {
 		T newToken = null;
-		ArrayList<T> newProbs = new ArrayList<T>();
-
-		// use initToken to get index from alphabet
-		int tokenIndex = alphabet.indexOf(initToken);
+		//ArrayList<T> newProbs = new ArrayList<T>();
+		int tokenIndex = alphabet.indexOf(initToken); // use initToken to get index from alphabet
 		// if index not in data set
 		if (tokenIndex == -1) {
 			System.out.print("Not Available in Data Set");
@@ -113,13 +110,21 @@ public class MarkovGenerator<T> extends ProbabilityGenerator<T> {
 		return newToken;
 	}
 
-	ArrayList<T> generate(int length, T initToken) {
+	ArrayList<T> generate(int length, T initToken) { //calls the method above for the melody length the user inputs
 		ArrayList<T> newSequence = new ArrayList<T>();
-		//generate with init token add it to sequence and add it to next
+		T newToken = initToken; //set newToken equal to initToken
+		for (int i = 0; i < length; i++){ //iterates through the melody length 
+		newSequence.add(newToken); //add the initToken as newToken to the newSequence array list
+		newToken = generate(newToken); //set newToken equal to the value generated from new token
+		
+		}
+	
 		return newSequence;
 	}
 
 	ArrayList<T> generate(int length) {
 		return generate(length, probGen.generate());
 	}
+	
+	
 }

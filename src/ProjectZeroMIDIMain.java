@@ -166,8 +166,8 @@ public class ProjectZeroMIDIMain extends PApplet {
 			
 		} else if (key=='5') {
 			
-			System.out.print(mPitches.generate(20));
-			System.out.print(mRhythms.generate(20));
+			System.out.println(mPitches.generate(20));
+			System.out.println(mRhythms.generate(20));
 			
 
 			}

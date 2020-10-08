@@ -11,15 +11,24 @@ import java.util.ArrayList;
 
 public class OrderM <T> extends MarkovGenerator<T>{
 	ArrayList<ArrayList<Integer>> transitionTable = new ArrayList();
-
+	MarkovGenerator<T> markovGen = new MarkovGenerator();
 
 OrderM() {
 	super();
 }
 
-void train(ArrayList<T> newTokens) { //filling the empty transition table
-	
-	//for (i = orderM-1 ; i < newTokens.size() - 1; i++) {
+void train(ArrayList<T> orderM) { //filling the empty transition table
+	int lastIndex = 0;//Remember to start the index into the input at 0 (with this algorithm) 
+	//for (i = orderM-1 ; i < orderM.size() - 1; i++) {
+		int curSequence = orderM.size(); //Create the current sequence (eg. curSequence) of size orderM from the input
+		ArrayList<Integer> uniqueAlphabetSequences = new ArrayList(); //add the previous tokens to a container (eg ArrayList). 
+		uniqueAlphabetSequences.add(orderM);
+		
+		
+	if (curSequence == -1) { //where does uniqueAlphabetSequences come in
+		int rowIndex = uniqueAlphabetSequences.size();
+		uniqueAlphabetSequences.add(curSequences);
+	}
 		
 	//}
 }

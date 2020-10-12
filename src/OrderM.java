@@ -10,20 +10,19 @@ import java.util.ArrayList;
 //import java.util.ArrayList;
 
 public class OrderM<T> extends MarkovGenerator<T> {
-	ArrayList<ArrayList<Integer>> transitionTable = new ArrayList();
-	MarkovGenerator<T> markovGen = new MarkovGenerator();
-	ArrayList<ArrayList<T>> uniqueAlphabetSequences = new ArrayList(); // add the previous tokens to a container (eg
-																		// ArrayList).
+	ArrayList<ArrayList<Integer>> transitionTable = new ArrayList(); //  declaring the transition table array list which holds an array list of an array list of integers 
+	MarkovGenerator<T> markovGen = new MarkovGenerator(); //using markov generator class to declare a markov generator
+	ArrayList<ArrayList<T>> uniqueAlphabetSequences = new ArrayList(); // add the previous tokens to a container (eg ArrayList).
 	int orderM;
 
 	OrderM(int sequenceSize) {
-		super();
+		super(); //allows inheritance of other classes 
 		orderM = sequenceSize;
 	}
 
 	void train(ArrayList<T> newTokens) { // filling the empty transition table
-		int lastIndex = 0;// Remember to start the index into the input at 0 (with this algorithm)
-		for (int i = orderM - 1; i < newTokens.size() - 1; i++) {
+		int lastIndex = 0;// start the index into the input at 0 (with this algorithm)
+		for (int i = orderM - 1; i < newTokens.size() - 1; i++) { //loops starting at one less than the sequence size for one less than newTokens size
 			ArrayList<T> curSequence = newTokens.size(); // Create the current sequence (eg. curSequence) of size orderM
 															// from the input
 			uniqueAlphabetSequences.add(orderM);

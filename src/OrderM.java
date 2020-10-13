@@ -23,9 +23,10 @@ public class OrderM<T> extends MarkovGenerator<T> {
 	void train(ArrayList<T> newTokens) { // filling the empty transition table
 		int lastIndex = 0;// start the index into the input at 0 (with this algorithm)
 		for (int i = orderM - 1; i < newTokens.size() - 1; i++) { //loops starting at one less than the sequence size for one less than newTokens size
-			ArrayList<T> curSequence = newTokens.size(); // Create the current sequence (eg. curSequence) of size orderM
-															// from the input
+			ArrayList<T> curSequence = newTokens.size(); // Create the current sequence (eg. curSequence) of size orderM from the input										
 			uniqueAlphabetSequences.add(orderM);
+			sublist(i-(orderM -1), i);
+			
 
 //	if (curSequence == -1) { //where does uniqueAlphabetSequences come in
 //		int rowIndex = uniqueAlphabetSequences.size();

@@ -38,38 +38,45 @@ public class ProjectZeroMIDIMain extends PApplet {
 
 	//doing all the setup stuff
 	public void setup() {
-		fill(120, 50, 240);
-		
-		//create my generators for pitch and rhythm
-		ProbabilityGenerator<Integer>pitchGenerator =  new ProbabilityGenerator<Integer>();
-		ProbabilityGenerator<Double>rhythmGenerator =  new ProbabilityGenerator<Double>();
-		
-		
-		// returns a url
-		String filePath = getPath("mid/gardel_por.mid");
-		
-		// playMidiFile(filePath);
-		midiNotes = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
-													//be created with "new". Note how every object is a pointer or reference. Every. single. one.
-
-
-//		// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
-		midiNotes.setWhichLine(0);
-		
-		//training the generators for pitch and rhythm to get the pitch and rhythm arrays from the MIDI Notes object 
-		pitchGenerator.train(midiNotes.getPitchArray());
-		rhythmGenerator.train(midiNotes.getRhythmArray());
-		
-		//enables use to generate and play a MIDI sequence file
-		player = new MelodyPlayer(this, 100.0f);
-		player.setup();
-		player.setMelody( pitchGenerator.generate(20) );
-		player.setRhythm( rhythmGenerator.generate(20) );
+//		fill(120, 50, 240);
+//		
+//		//create my generators for pitch and rhythm
+//		ProbabilityGenerator<Integer>pitchGenerator =  new ProbabilityGenerator<Integer>();
+//		ProbabilityGenerator<Double>rhythmGenerator =  new ProbabilityGenerator<Double>();
+//		
+//		//MarkovGenerator<Integer>pitchMarkovGenerator =  new MarkovGenerator<Integer>();
+//		MarkovGenerator<Double>rhythmMarkovGenerator =  new MarkovGenerator<Double>();
+//		
+//		// returns a url
+//		String filePath = getPath("mid/gardel_por.mid");
+//		
+//		// playMidiFile(filePath);
+//		midiNotes = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
+//													//be created with "new". Note how every object is a pointer or reference. Every. single. one.
+//
+//
+////		// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
+//		midiNotes.setWhichLine(0);
+//		
+//		//training the generators for pitch and rhythm to get the pitch and rhythm arrays from the MIDI Notes object 
+//		pitchGenerator.train(midiNotes.getPitchArray());
+//		rhythmGenerator.train(midiNotes.getRhythmArray());
+//		
+//		//enables use to generate and play a MIDI sequence file
+//		player = new MelodyPlayer(this, 100.0f);
+//		player.setup();
+//		player.setMelody( pitchGenerator.generate(20) );
+//		player.setRhythm( rhythmGenerator.generate(20) );
+//		player.setMelody( pitchMarkovGenerator.generate(20) );
+//		player.setRhythm( rhythmMarkovGenerator.generate(20) );
 	}
 
 	public void draw() {
-		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+		//player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		//this is what the user sees that allows them to start the program
+		
+		//start and stop boolean
+		
 		textSize(12);
 		fill(0,102,153);
 		text("Press 1 to start unit test 1, 2 to start unit test 2, 3 to start unit test 3, and 4 to start unit test 4!", width/4, height/2);
@@ -101,52 +108,63 @@ public class ProjectZeroMIDIMain extends PApplet {
 
 	//this starts & restarts the melody.
 	public void keyPressed() {
-		//this calls the Probability Generator class delineated by Pitch and Rhythm
+		
+		//DECLARING GENERATORS 
+		//why do I have probability generators declared and training in setup?
+		
+		//Project 1 - this calls the Probability Generator class delineated by Pitch and Rhythm
 		ProbabilityGenerator<Integer> generatorPitch = new ProbabilityGenerator(); 
 		ProbabilityGenerator<Double> generatorRhythm = new ProbabilityGenerator();
+		
+		//Project 1 - this class the Markov Generator class delineated by Pitch and Rhythm EXTRA?
 		MarkovGenerator<Integer> markovPitches = new MarkovGenerator();
 		MarkovGenerator<Double> markovRhythms = new MarkovGenerator();
 		
-		MidiFileToNotes midiNotesMary; //read a midi file
-		
-		// returns a url
-		String filePath = getPath("mid/MaryHadALittleLamb.mid");
-		// playMidiFile(filePath);
-
-		midiNotesMary = new MidiFileToNotes(filePath);//creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
-		//be created with "new". Note how every object is a pointer or reference. Every. single. one.
-
-
-		// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
-		midiNotesMary.setWhichLine(0);
-		
-		//training the generators for pitch and rhythm to get the pitch and rhythm arrays from the MIDI Notes Mary object 
-		generatorPitch.train(midiNotesMary.getPitchArray());
-		generatorRhythm.train(midiNotesMary.getRhythmArray());
-		
-		
-		//declaring Markov Generator array lists for pitches and rhythms
+		//Project 2 - declaring Markov Generator array lists for pitches and rhythms
 		MarkovGenerator<Integer> mPitches = new MarkovGenerator();
 		MarkovGenerator<Double> mRhythms = new MarkovGenerator();
 		
+		//Project 3 - declaring Order M Markov Generator array lists for pitches and rhythms;
+		OrderM<Integer> pitchesOrderM = new OrderM(2); 
+		OrderM<Double> rhythmsOrderM = new OrderM(2); 
+		
+		//MidiNotesMary setup
+		MidiFileToNotes midiNotesMary; //read a midi file
+		String filePath = getPath("mid/MaryHadALittleLamb.mid"); // returns a url
+		midiNotesMary = new MidiFileToNotes(filePath);//creates a new MidiFileToNotes 
+		midiNotesMary.setWhichLine(0); // which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
+		
+		//TRAINING GENERATORS
+		//Project 1 - training the generators for pitch and rhythm to get the pitch and rhythm arrays from the MIDI Notes Mary object 
+		generatorPitch.train(midiNotesMary.getPitchArray());
+		generatorRhythm.train(midiNotesMary.getRhythmArray());
+		
+		//Project 1 - Why do I not train markovPitches and markovRhythms?
+
+		//Project 2 - training the markov generators for pitch and rhythm to get the pitch and rhythm arrays from the MIDI Notes Mary object 
 		mPitches.train(midiNotesMary.getPitchArray());
 		mRhythms.train(midiNotesMary.getRhythmArray());
+		
+		//Project 3- training the Order M markov generators for pitch and rhythm to get the pitch and rhythm arrays from the MIDI Notes Mary object 
+		pitchesOrderM.train(midiNotesMary.getPitchArray());
+		rhythmsOrderM.train(midiNotesMary.getRhythmArray());
+		System.out.println("here");
 		
 		if (key == ' ') {
 			player.reset();
 			println("Melody started!");
 		} else if( key == '1') { 
-			//runs unit 1 test when the user presses "1" by printing both the pitch and rhythm tokens & probabilities using the methods in ProbabilityGenerator
+			//runs Project 0 Unit 1 test when the user presses "1" by printing both the pitch and rhythm tokens & probabilities using the methods in ProbabilityGenerator
 			generatorPitch.printProbabilityDistribution("Pitches:");
 			generatorRhythm.printProbabilityDistribution("Rhythms:");
 			
 		} else if (key == '2') {
-			//runs unit 2 test when the user presses "2" and calls the generate function to make a melody with 20 notes and then print the pitches and rhythms to the console
+			//runs Project 0 Unit 2 test when the user presses "2" and calls the generate function to make a melody with 20 notes and then print the pitches and rhythms to the console
 			System.out.println(generatorPitch.generate(20));
 			System.out.println(generatorRhythm.generate(20));
 			
 		} else if (key=='3') {
-			//runs unit 3 test when the user presses "3" and probabilities are calculated and printed for melodies of 20 notes 10,000 times
+			//runs Project 0 Unit 3 test when the user presses "3" and probabilities are calculated and printed for melodies of 20 notes 10,000 times
 			ProbabilityGenerator<Integer> probDistPitch = new ProbabilityGenerator(); 
 			ProbabilityGenerator<Double> probDistRhythm = new ProbabilityGenerator();
 			for (int i = 0; i < 10000; i++) {	
@@ -185,6 +203,9 @@ public class ProjectZeroMIDIMain extends PApplet {
 //			mPitches.train(generatorPitch.generate(20));
 //			mRhythms.train(generatorRhythm.generate(20)); 
 //			}
+		//}
+		//} else if (key == '7') {
+			
 		//}
 		
 		

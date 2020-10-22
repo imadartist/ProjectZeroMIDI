@@ -28,7 +28,7 @@ public class OrderM<T> extends MarkovGenerator<T> {
 			
 			
 			ArrayList<T> curSequence = new ArrayList (newTokens.subList(i - (orderM - 1), i)); // create the current sequence of size Order M from the input
-			//adding previous tokens; read about inclusive exclusive
+			//adding previous tokens; read about inclusive exclusive...sublists are exclusive
 			System.out.println(curSequence);
 //			// uniqueAlphabetSequences.add(orderM); //add array list of sequences to uniqueAlphabetSequences. do i need this?
 //

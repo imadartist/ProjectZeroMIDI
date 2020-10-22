@@ -27,11 +27,11 @@ public class ProjectZeroMIDIMain extends PApplet {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		PApplet.main("ProjectZeroMIDIMain"); // change this to match above class & file name
+		PApplet.main("ProjectZeroMIDIMain"); 
 
 	}
 
-	// setting the window size to 300x300
+	// setting the window size 
 	public void settings() {
 		size(1000, 1000);
 
@@ -98,9 +98,9 @@ public class ProjectZeroMIDIMain extends PApplet {
 				width / 4, height / 4 + 250);
 		text("Press 7 to start Project 3 Unit Test 1 (Print the Order M Transition Tables for the Test Melody)",
 				width / 4, height / 4 + 300);
-		text("Press 7 to start Project 3 Unit Test 2 (Generate & Print a 20-Note Melody using Test Melody and Order M Markov Generator)",
+		text("Press 8 to start Project 3 Unit Test 2 (Generate & Print a 20-Note Melody using Test Melody and Order M Markov Generator)",
 				width / 4, height / 4 + 350);
-		text("Press 7 to start Project 3 Unit Test 3 (Generate & Print 10,000 20-Note Melodies using Order M Markov Generator)",
+		text("Press 9 to start Project 3 Unit Test 3 (Generate & Print 10,000 20-Note Melodies using Order M Markov Generator)",
 				width / 4, height / 4 + 400);
 
 	}

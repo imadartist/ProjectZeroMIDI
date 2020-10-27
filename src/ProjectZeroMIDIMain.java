@@ -24,7 +24,8 @@ public class ProjectZeroMIDIMain extends PApplet {
 
 	MelodyPlayer player; // play a midi sequence
 	MidiFileToNotes midiNotes; // read a midi file
-
+	boolean stopPlayer = false;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PApplet.main("ProjectZeroMIDIMain"); 
@@ -65,8 +66,8 @@ public class ProjectZeroMIDIMain extends PApplet {
 		// enables use to generate and play a MIDI sequence file
 		player = new MelodyPlayer(this, 100.0f);
 		player.setup();
-		player.setMelody(pitchGenerator.generate(20));
-		player.setRhythm(rhythmGenerator.generate(20));
+		//player.setMelody(pitchGenerator.generate(20));
+		//player.setRhythm(rhythmGenerator.generate(20));
 		player.setMelody(pitchMarkovGenerator.generate(20));
 		player.setRhythm(rhythmMarkovGenerator.generate(20));
 	}
@@ -74,13 +75,10 @@ public class ProjectZeroMIDIMain extends PApplet {
 	public void draw() {
 
 		// start and stop boolean
-		//boolean stopPlayer;
-		// if (stopPlayer == true) {
+		if (stopPlayer) {
 		player.play(); // play each note in the sequence -- the player will determine whether is time
 						// for a note onset
-		// } else {
-
-		// }
+		} 
 
 		textSize(12);
 		fill(0, 102, 153);
@@ -175,6 +173,7 @@ public class ProjectZeroMIDIMain extends PApplet {
 
 		if (key == ' ') {
 			player.reset();
+			stopPlayer = !stopPlayer;
 			println("Melody started!");
 		} else if (key == '1') {
 			// runs Project 1 Unit Test 1 when the user presses "1" by printing both the
